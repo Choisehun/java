@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.my.ch.mapper.Mapper">
+		<insert id="write">
+			insert into post (user_id,title,content,created_at,views,category_id) values (#{userid},#{title},#{content},now(),0,#{category}); 
+		</insert>
+		
+		<select id="getList" resultType="com.my.ch.dto.PostDto">
+			SELECT * FROM post WHERE category_id = (#{category_id}) ORDER BY post_num DESC;
+		</select>
+		
+		<select id="getRead" resultType="com.my.ch.dto.PostDto">
+			SELECT * from post WHERE post_num = (#{post_num})
+		</select>
+		
+		<update id="getDelete">
+			DELETE from post WHERE post_num = (#{post_num})
+		</update>
+		
+		<update id="modify">
+		UPDATE post SET title=#{title}, content=#{content} WHERE post_num=#{post_num};
+		</update>
+		</mapper>
+		
